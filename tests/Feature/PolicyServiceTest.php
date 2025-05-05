@@ -53,7 +53,7 @@ class PolicyServiceTest extends TestCase
                 'license_status' => 'Valid',
                 'license_effective_date' => now()->subYear(),
                 'license_expiration_date' => now()->addYear(),
-                'license_class' => 'C1'
+                'license_class' => 'D'
             ]],
         ]);
 
@@ -79,7 +79,7 @@ class PolicyServiceTest extends TestCase
             'drivers' => [
                 [
                     'first_name' => 'Jane',
-                    'last_name' => 'Smith',
+                    'last_name' => 'Doe',
                     'age' => 30,
                     'gender' => 'Female',
                     'marital_status' => 'Married',
@@ -88,7 +88,7 @@ class PolicyServiceTest extends TestCase
                     'license_status' => 'Valid',
                     'license_effective_date' => now()->subYears(5)->toDateString(),
                     'license_expiration_date' => now()->addYears(5)->toDateString(),
-                    'license_class' => 'C'
+                    'license_class' => 'C1'
                 ]
             ],
             'vehicles' => [

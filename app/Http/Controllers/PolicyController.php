@@ -109,4 +109,17 @@ class PolicyController extends Controller
             ], 500);
         }
     }
+
+    public function downloadPolicyPDF(Policy $policy)
+    {
+        try {
+            return $this->policyService->generatePolicyPDF($policy);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to generate policy document.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

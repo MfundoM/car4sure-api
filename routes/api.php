@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::apiResource('policies', PolicyController::class);
+Route::get('/policies/{policy}/download', [PolicyController::class, 'downloadPolicyPDF']);

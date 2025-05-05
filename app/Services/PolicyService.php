@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Policy;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class PolicyService
 {
@@ -131,5 +132,20 @@ class PolicyService
         }
 
         return 'Expired';
+    }
+
+    public function generatePolicyPDF(Policy $policy)
+    {
+        $policyData = $policy->load([
+            'policyHolder',
+            'drivers',
+            'vehicles.garagingAddress',
+            'vehicles.coverages'
+        ]);
+
+        // dd($policyData);
+        $pdf = PDF::loadView('policy.pdf', ['policy' => $policyData]);
+
+        return $pdf->download('policy_' . $policy->policy_no . '.pdf');
     }
 }

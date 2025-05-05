@@ -20,7 +20,7 @@ class DriverFactory extends Factory
      */
     public function definition(): array
     {
-        $start = $this->faker->dateTimeBetween('-10 years', '-1 years');
+        $start = $this->faker->dateTimeBetween('-5 years', '-1 years');
         $end = (clone $start)->modify('+5 years');
 
         return [
@@ -29,13 +29,13 @@ class DriverFactory extends Factory
             'last_name' => $this->faker->lastName,
             'age' => $this->faker->numberBetween(20, 35),
             'gender' => $this->faker->randomElement(['Male', 'Female']),
-            'marital_status' => $this->faker->randomElement(['Single', 'Married']),
+            'marital_status' => $this->faker->randomElement(['Single', 'Married', 'Divoced']),
             'license_number' => strtoupper($this->faker->bothify('??######')),
             'license_state' => $this->faker->stateAbbr,
             'license_status' => $this->faker->randomElement(['Valid', 'Suspended', 'Expired']),
             'license_effective_date' => $start->format('Y-m-d'),
             'license_expiration_date' => $end->format('Y-m-d'),
-            'license_class' => $this->faker->randomElement(['C', 'M', 'A']),
+            'license_class' => $this->faker->randomElement(['B', 'C1', 'D']),
         ];
     }
 }

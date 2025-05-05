@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PolicyRequest;
 use App\Models\Policy;
 use App\Services\PolicyService;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PolicyController extends Controller
 {
@@ -21,7 +21,7 @@ class PolicyController extends Controller
             'drivers',
             'vehicles.garagingAddress',
             'vehicles.coverages'
-        ])->paginate(10);
+        ])->where('user_id', Auth::id())->paginate(10);
 
         return response()->json([
             'success' => true,
@@ -35,7 +35,7 @@ class PolicyController extends Controller
     public function store(PolicyRequest $request)
     {
         try {
-            $policy = $this->policyService->createPolicy($request->validated());
+            $policy = $this->policyService->createPolicy($request->validated(), Auth::user());
 
             return response()->json([
                 'success' => true,
@@ -56,6 +56,10 @@ class PolicyController extends Controller
      */
     public function show(Policy $policy)
     {
+        if ($policy->user_id !== Auth::id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
         return response()->json([
             'success' => true,
             'data' => $policy->load([
@@ -72,6 +76,10 @@ class PolicyController extends Controller
      */
     public function update(PolicyRequest $request, Policy $policy)
     {
+        if ($policy->user_id !== Auth::id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
         try {
             $updatedPolicy = $this->policyService->updatePolicy($request->validated(), $policy);
 
@@ -94,6 +102,10 @@ class PolicyController extends Controller
      */
     public function destroy(Policy $policy)
     {
+        if ($policy->user_id !== Auth::id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
         try {
             $policy->delete();
 
@@ -112,6 +124,10 @@ class PolicyController extends Controller
 
     public function downloadPolicyPDF(Policy $policy)
     {
+        if ($policy->user_id !== Auth::id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
         try {
             return $this->policyService->generatePolicyPDF($policy);
         } catch (\Throwable $e) {

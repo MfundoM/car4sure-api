@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Policy;
+use App\Models\User;
+use Laravel\Sanctum\Sanctum;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -18,7 +20,10 @@ class PolicyControllerTest extends TestCase
 
     public function test_it_can_list_policies()
     {
-        Policy::factory()->count(3)->create();
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+
+        Policy::factory()->count(3)->create(['user_id' => $user->id]);
 
         $response = $this->getJson('/api/policies');
 
@@ -27,6 +32,9 @@ class PolicyControllerTest extends TestCase
 
     public function test_it_can_create_a_policy()
     {
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+
         $payload = $this->validPayload();
 
         $response = $this->postJson('/api/policies', $payload);
@@ -36,7 +44,10 @@ class PolicyControllerTest extends TestCase
 
     public function test_it_can_show_a_policy()
     {
-        $policy = Policy::factory()->create();
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+
+        $policy = Policy::factory()->create(['user_id' => $user->id]);
 
         $response = $this->getJson("/api/policies/{$policy->id}");
 
@@ -45,7 +56,10 @@ class PolicyControllerTest extends TestCase
 
     public function test_it_can_update_a_policy()
     {
-        $policy = Policy::factory()->create();
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+
+        $policy = Policy::factory()->create(['user_id' => $user->id]);
         $payload = $this->validPayload();
 
         $response = $this->putJson("/api/policies/{$policy->id}", $payload);
@@ -55,7 +69,10 @@ class PolicyControllerTest extends TestCase
 
     public function test_it_can_delete_a_policy()
     {
-        $policy = Policy::factory()->create();
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+
+        $policy = Policy::factory()->create(['user_id' => $user->id]);
 
         $response = $this->deleteJson("/api/policies/{$policy->id}");
 

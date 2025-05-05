@@ -3,7 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\Policy;
+use App\Models\User;
 use App\Services\PolicyService;
+use Laravel\Sanctum\Sanctum;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -22,9 +24,12 @@ class PolicyServiceTest extends TestCase
 
     public function test_it_creates_a_policy_with_relations()
     {
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+
         $data = $this->getTestPolicyData();
 
-        $policy = $this->policyService->createPolicy($data);
+        $policy = $this->policyService->createPolicy($data, $user);
 
         $this->assertInstanceOf(Policy::class, $policy);
         $this->assertNotNull($policy->policyHolder);
@@ -38,7 +43,10 @@ class PolicyServiceTest extends TestCase
 
     public function test_it_updates_a_policy_and_replaces_relations()
     {
-        $originalData = $this->policyService->createPolicy($this->getTestPolicyData());
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+
+        $originalData = $this->policyService->createPolicy($this->getTestPolicyData(), $user);
 
         $updateData = $this->getTestPolicyData([
             'policy_holder' => ['first_name' => 'Updated'],

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Policy;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -24,6 +25,7 @@ class PolicyFactory extends Factory
         $end = (clone $start)->modify('+1 year');
 
         return [
+            'user_id' => User::factory(),
             'policy_no' => 'POL' . strtoupper(Str::random(10)),
             'policy_status' => $this->faker->randomElement(['Pending', 'Active', 'Expired', 'Cancelled']),
             'policy_type' => 'Auto',

@@ -99,7 +99,7 @@
 
     <div class="container">
         <div class="header">
-            <h1>Policy Document</h1>
+            <h1>Car4Sure Policy Document</h1>
             <p>Policy Number: {{ $policy->policy_no }}</p>
             <p><strong>Effective Date:</strong> {{ $policy->policy_effective_date }} <strong>Expiry Date:</strong> {{ $policy->policy_expiration_date }}</p>
         </div>

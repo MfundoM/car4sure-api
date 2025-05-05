@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Policy;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -17,7 +18,7 @@ class PolicyService
         //
     }
 
-    public function createPolicy(array $data)
+    public function createPolicy(array $data, User $user)
     {
         $currentDate = now();
         $policyEffectiveDate = Carbon::parse($data['policy_effective_date']);
@@ -26,6 +27,7 @@ class PolicyService
         $status = $this->determinePolicyStatus($currentDate, $policyEffectiveDate, $policyExpirationDate);
 
         $policy = Policy::create([
+            'user_id' => $user->id,
             'policy_no' => $this->generatePolicyNumber(),
             'policy_status' => $status,
             'policy_type' => 'Auto',

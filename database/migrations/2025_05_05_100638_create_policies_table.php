@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('policies', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('policy_no')->unique();
             $table->enum('policy_status', ['Pending', 'Active', 'Expired', 'Cancelled']);
             $table->string('policy_type')->default('Auto');

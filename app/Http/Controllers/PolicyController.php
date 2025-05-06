@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class PolicyController extends Controller
 {
-    public function __construct(private PolicyService $policyService) {}
+    public function __construct(private PolicyService $policyService)
+    {
+        $this->authorizeResource(Policy::class, 'policy');
+    }
 
     /**
      * Display a listing of the resource.
@@ -56,10 +59,6 @@ class PolicyController extends Controller
      */
     public function show(Policy $policy)
     {
-        if ($policy->user_id !== Auth::id()) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
-
         return response()->json([
             'success' => true,
             'data' => $policy->load([
@@ -76,10 +75,6 @@ class PolicyController extends Controller
      */
     public function update(PolicyRequest $request, Policy $policy)
     {
-        if ($policy->user_id !== Auth::id()) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
-
         try {
             $updatedPolicy = $this->policyService->updatePolicy($request->validated(), $policy);
 
@@ -102,10 +97,6 @@ class PolicyController extends Controller
      */
     public function destroy(Policy $policy)
     {
-        if ($policy->user_id !== Auth::id()) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
-
         try {
             $policy->delete();
 
@@ -124,10 +115,6 @@ class PolicyController extends Controller
 
     public function downloadPolicyPDF(Policy $policy)
     {
-        if ($policy->user_id !== Auth::id()) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
-
         try {
             return $this->policyService->generatePolicyPDF($policy);
         } catch (\Throwable $e) {

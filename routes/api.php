@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\DriverController;
+use App\Http\Controllers\VehicleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('policies', PolicyController::class);
     Route::get('/policies/{policy}/download', [PolicyController::class, 'downloadPolicyPDF']);
+
+    Route::apiResource('drivers', DriverController::class)->except(['index', 'show', 'create', 'edit', 'store', 'update']);
+    Route::apiResource('vehicles', VehicleController::class)->except(['index', 'show', 'create', 'edit', 'store', 'update']);
 });

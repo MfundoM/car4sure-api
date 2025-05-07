@@ -5,7 +5,8 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:3000'],
+    // 'allowed_origins' => ['http://localhost:3000'],
+    'allowed_origins' => ['https://car4sure.netlify.app', 'http://localhost:3000'],
 
     'allowed_origins_patterns' => [],
 

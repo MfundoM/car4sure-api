@@ -27,8 +27,8 @@ This is the backend of the **Car4Sure Insurance Policy Management System**, buil
 ## Setup Instructions
 
 ```bash
-git clone https://github.com/yourusername/car4sure.git
-cd car4sure/backend
+git clone https://github.com/MfundoM/car4sure-api.git
+cd car4sure-api
 
 # Install dependencies
 composer install
@@ -39,7 +39,7 @@ cp .env.example .env
 # Generate app key
 php artisan key:generate
 
-# Configure your .env with DB credentials and Sanctum settings
+# Configure your .env with DB credentials
 # Run migrations
 php artisan migrate
 

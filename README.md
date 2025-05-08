@@ -14,10 +14,6 @@ This is the backend of the **Car4Sure Insurance Policy Management System**, buil
 
 ---
 
-### Live link
-
-[Live](https://car4sure-api.onrender.com)
-
 ## Features
 
 - User Registration & Login (Sanctum)

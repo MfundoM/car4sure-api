@@ -15,14 +15,14 @@ This is the backend of the **Car4Sure Insurance Policy Management System**, buil
 ---
 
 
-## Backend: Laravel (PHP Framework)
+## Framework choice: Laravel
 
-I chose **Laravel** as the backend framework due to its elegant syntax, powerful built-in features, and it's robust ecosystem. Laravel simplifies common tasks such as:
+I chose **Laravel** as the backend framework due to its elegant syntax, powerful built-in features, and robust ecosystem. It simplifies common tasks such as:
 
-- Database management via Eloquent ORM  
-- Route handling and middleware  
-- Form request validation  
-- Authentication using Sanctum  
+- Database management via Eloquent ORM
+- Route handling and middleware
+- Form request validation
+- Authentication using Sanctum
 - API development with clear structure and security
 - It's ideal for building scalable and maintainable RESTful APIs with ease.
 

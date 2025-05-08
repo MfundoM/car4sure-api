@@ -38,7 +38,7 @@ I chose **Laravel** as the backend framework due to its elegant syntax, powerful
 ---
 
 ## Live Site
-[Live](https://car4sure.netlify.app)
+[https://car4sure.netlify.app](https://car4sure.netlify.app)
 
 ---
 

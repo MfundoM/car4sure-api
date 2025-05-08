@@ -14,7 +14,6 @@ This is the backend of the **Car4Sure Insurance Policy Management System**, buil
 
 ---
 
-
 ## Framework choice: Laravel
 
 I chose **Laravel** as the backend framework due to its elegant syntax, powerful built-in features, and robust ecosystem. It simplifies common tasks such as:
@@ -35,6 +34,11 @@ I chose **Laravel** as the backend framework due to its elegant syntax, powerful
 - Authenticated access: each user only sees their own policies
 - Policy PDF document generation (downloadable)
 - RESTful API with validation and error handling
+
+---
+
+## Live Site
+[Live](https://car4sure.netlify.app)
 
 ---
 
